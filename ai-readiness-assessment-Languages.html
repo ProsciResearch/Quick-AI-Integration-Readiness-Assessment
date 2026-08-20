@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prosci AI Integration Readiness - Quick Assessment</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+  :root {
+    --damson: #350944;
+    --near-black: #1a1a1a;
+    --damson-800: #5D3A69;
+    --damson-600: #866B8F;
+    --damson-400: #AE9DB4;
+    --damson-200: #D7CEDA;
+    --damson-100: #EBE7EC;
+    --damson-50: #F5F3F6;
+    --linen: #F6F4ED;
+    --sand: #F2E8DE;
+    --soft-white: #FFFEFA;
+    --white: #FFFFFF;
+    --stormy-teal: #0E665E;
+    --system-red: #C40B0E;
+    --system-orange: #E27225;
+    --system-blue: #0275D4;
+    --system-green: #4DB748;
+    --system-yellow: #F2A72A;
+    --border-default: #E5E1DB;
+    --border-strong: #C8C2B8;
+    --border-muted: #F0ECE6;
+
+    --tint-red: #F3CECF;
+    --tint-orange: #FCEDD4;
+    --tint-teal: #DCEEEC;
+    --text-red: #C40B0E;
+    --text-orange: #9a6a10;
+    --text-teal: #0E665E;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background-color: var(--linen);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    font-family: 'Instrument Sans', -apple-system, sans-serif;
+    color: var(--near-black);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--damson); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .page-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 48px 24px 56px;
+  }
+
+  /* ---------- Assessment widget card ---------- */
+
+  .assessment-widget {
+    background: var(--soft-white);
+    border-radius: 16px;
+    box-shadow: 0 1px 3px rgba(53, 9, 68, 0.08), 0 12px 32px rgba(53, 9, 68, 0.05);
+    padding: 40px;
+  }
+
+  .aw-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .aw-header-text {
+    flex: 1;
+    min-width: 240px;
+  }
+
+  .aw-header h3 {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-weight: 400;
+    font-size: 30px;
+    color: var(--damson);
+    margin: 0 0 10px;
+    line-height: 1.25;
+  }
+
+  .aw-header p {
+    margin: 0;
+    max-width: 640px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--damson-800);
+  }
+
+  .aw-lang {
+    flex-shrink: 0;
+  }
+
+  .aw-lang-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--damson-600);
+    margin-bottom: 5px;
+  }
+
+  .aw-lang-select {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--damson);
+    background: var(--soft-white);
+    border: 1px solid var(--border-strong);
+    border-radius: 8px;
+    padding: 7px 12px;
+    cursor: pointer;
+    outline: none;
+    min-width: 150px;
+  }
+
+  .aw-lang-select:hover {
+    border-color: var(--damson-400);
+  }
+
+  .aw-lang-select:focus-visible {
+    box-shadow: 0 0 0 3px var(--damson-200);
+    border-color: var(--damson);
+  }
+
+  .aw-body {
+    display: flex;
+    gap: 40px;
+    margin-top: 36px;
+    align-items: flex-start;
+  }
+
+  /* ---------- Left column ---------- */
+
+  .aw-left {
+    flex: 1.6;
+    min-width: 0;
+  }
+
+  .aw-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+    background: var(--sand);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 8px;
+  }
+
+  .aw-legend-item {
+    font-size: 12.5px;
+    color: var(--near-black);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+  }
+
+  .aw-legend-item strong {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--damson);
+    color: var(--soft-white);
+    font-size: 11px;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  .aw-domains {
+    margin-top: 8px;
+  }
+
+  .aw-domain {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--border-muted);
+  }
+
+  .aw-domain:last-child {
+    border-bottom: none;
+    padding-bottom: 4px;
+  }
+
+  .aw-domain-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .aw-domain-name {
+    font-family: 'Instrument Sans', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--damson);
+    margin: 0 0 6px;
+  }
+
+  .aw-domain-sub {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--near-black);
+    margin: 0;
+    max-width: 90%;
+  }
+
+  .aw-domain-score {
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 17px;
+    border: 2px solid var(--border-default);
+    background: var(--soft-white);
+    color: var(--near-black);
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+  }
+
+  .aw-domain-score.scored-low  { background: var(--tint-red);    border-color: var(--text-red);    color: var(--text-red); }
+  .aw-domain-score.scored-mid  { background: var(--tint-orange); border-color: var(--text-orange);  color: var(--text-orange); }
+  .aw-domain-score.scored-high { background: var(--tint-teal);   border-color: var(--text-teal);    color: var(--text-teal); }
+
+  .aw-slider-wrap {
+    margin-top: 18px;
+  }
+
+  input[type="range"].aw-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 8px;
+    border-radius: 999px;
+    outline: none;
+    cursor: pointer;
+    background: var(--border-default);
+  }
+
+  input[type="range"].aw-slider:focus-visible {
+    box-shadow: 0 0 0 3px var(--damson-200);
+  }
+
+  input[type="range"].aw-slider::-webkit-slider-runnable-track {
+    height: 8px;
+    border-radius: 999px;
+    background: transparent;
+  }
+
+  input[type="range"].aw-slider::-moz-range-track {
+    height: 8px;
+    border-radius: 999px;
+    background: transparent;
+  }
+
+  input[type="range"].aw-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--damson);
+    border: 3px solid var(--soft-white);
+    box-shadow: 0 1px 4px rgba(53, 9, 68, 0.4);
+    margin-top: -6px;
+    cursor: pointer;
+  }
+
+  input[type="range"].aw-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--damson);
+    border: 3px solid var(--soft-white);
+    box-shadow: 0 1px 4px rgba(53, 9, 68, 0.4);
+    cursor: pointer;
+    border: none;
+  }
+
+  .aw-tick-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 6px;
+    padding: 0 2px;
+    font-size: 11.5px;
+    color: var(--damson-600);
+  }
+
+  /* ---------- Right column (results) ---------- */
+
+  .aw-right {
+    flex: 1;
+    min-width: 280px;
+    background: var(--sand);
+    border-radius: 14px;
+    padding: 28px 24px;
+    position: sticky;
+    top: 24px;
+    align-self: flex-start;
+    box-shadow: 0 2px 10px rgba(53, 9, 68, 0.08);
+  }
+
+  .aw-right-score-block {
+    text-align: center;
+  }
+
+  .aw-right-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--damson-600);
+    margin-bottom: 8px;
+  }
+
+  .aw-right-total {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-weight: 400;
+    font-size: 40px;
+    color: var(--damson);
+    line-height: 1;
+  }
+
+  .aw-right-total span {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 18px;
+    color: var(--damson-600);
+  }
+
+  .aw-right-sublabel {
+    font-size: 12.5px;
+    font-style: italic;
+    color: var(--damson-600);
+    margin-top: 6px;
+  }
+
+  .aw-bars-block {
+    margin-top: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .aw-bar-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .aw-bar-label {
+    width: 68px;
+    flex-shrink: 0;
+    font-size: 10.5px;
+    font-weight: 600;
+    color: var(--damson-800);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .aw-bar-track {
+    flex: 1;
+    height: 8px;
+    background: var(--border-default);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+
+  .aw-bar-fill {
+    height: 100%;
+    border-radius: 999px;
+    transition: width 0.25s ease, background 0.25s ease;
+  }
+
+  .aw-bar-val {
+    width: 14px;
+    flex-shrink: 0;
+    text-align: right;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--near-black);
+  }
+
+  .aw-band {
+    margin-top: 22px;
+    padding: 16px 18px;
+    border-radius: 10px;
+    border-left: 4px solid var(--border-strong);
+    background: var(--soft-white);
+  }
+
+  .aw-band strong {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 6px;
+    color: var(--near-black);
+  }
+
+  .aw-band p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--near-black);
+  }
+
+  .aw-band.low    { border-left-color: var(--text-red);    background: var(--tint-red); }
+  .aw-band.low strong    { color: var(--text-red); }
+  .aw-band.mid    { border-left-color: var(--text-orange); background: var(--tint-orange); }
+  .aw-band.mid strong    { color: var(--text-orange); }
+  .aw-band.high   { border-left-color: var(--text-teal);   background: var(--tint-teal); }
+  .aw-band.high strong   { color: var(--text-teal); }
+
+  .aw-cta {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .btn-damson-sm, .btn-outline-light {
+    display: block;
+    text-align: center;
+    padding: 11px 18px;
+    border-radius: 8px;
+    font-size: 13.5px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+  }
+
+  .btn-damson-sm {
+    background: var(--damson);
+    color: var(--soft-white);
+    border: 1px solid var(--damson);
+  }
+  .btn-damson-sm:hover {
+    background: var(--damson-800);
+    text-decoration: none;
+  }
+
+  .btn-outline-light {
+    background: transparent;
+    color: var(--damson);
+    border: 1px solid var(--border-strong);
+  }
+  .btn-outline-light:hover {
+    background: var(--damson-50);
+    border-color: var(--damson-400);
+    text-decoration: none;
+  }
+
+  .btn-print {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px dashed var(--border-strong);
+    background: transparent;
+    color: var(--damson-800);
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+  }
+  .btn-print:hover {
+    background: var(--damson-50);
+    border-color: var(--damson-400);
+    color: var(--damson);
+  }
+
+  /* ---------- Footer ---------- */
+
+  footer {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-default);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .footer-brand {
+    font-weight: 700;
+    color: var(--damson);
+    font-size: 14px;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .footer-brand span {
+    font-weight: 400;
+    color: var(--damson-600);
+    font-size: 12px;
+  }
+
+  .footer-note {
+    font-size: 12px;
+    color: var(--damson-600);
+  }
+
+  /* ---------- Responsive ---------- */
+
+  @media (max-width: 900px) and (min-width: 701px) {
+    .assessment-widget { padding: 32px 24px; }
+    .aw-body { gap: 24px; }
+    .aw-left { flex: 1.4; }
+    .aw-right { min-width: 230px; padding: 22px 18px; }
+    .aw-bar-label { width: 58px; }
+  }
+
+  @media (max-width: 700px) {
+    .assessment-widget { padding: 28px 22px; }
+    .aw-body { flex-direction: column; gap: 32px; }
+    .aw-right { position: static; width: 100%; min-width: 0; }
+    .aw-domain-sub { max-width: 100%; }
+  }
+
+  @media (max-width: 480px) {
+    .page-wrap { padding: 32px 16px 40px; }
+    .aw-header h3 { font-size: 24px; }
+    .aw-lang { width: 100%; }
+    .aw-lang-select { width: 100%; }
+    .aw-domain-top { flex-wrap: wrap; }
+    footer { flex-direction: column; align-items: flex-start; }
+  }
+
+  /* ---------- Print / export ---------- */
+
+  .print-only { display: none; }
+
+  #print-summary {
+    font-family: 'Instrument Sans', sans-serif;
+    color: #000;
+  }
+
+  .pr-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 2px solid #350944;
+    padding-bottom: 10px;
+    margin-bottom: 18px;
+  }
+  .pr-header h1 {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-weight: 400;
+    font-size: 19px;
+    color: #350944;
+    margin: 0;
+  }
+  .pr-header .pr-date {
+    font-size: 11px;
+    color: #555;
+  }
+
+  .pr-total-label {
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #5D3A69;
+    margin-bottom: 4px;
+  }
+  .pr-total-row {
+    margin-bottom: 18px;
+  }
+  .pr-total-score {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 26px;
+    color: #350944;
+  }
+  .pr-total-score span {
+    font-size: 14px;
+    color: #5D3A69;
+  }
+
+  .pr-domains {
+    margin-bottom: 16px;
+  }
+  .pr-domain-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 7px 0;
+    border-bottom: 1px solid #ddd;
+    page-break-inside: avoid;
+  }
+  .pr-domain-row:last-child { border-bottom: none; }
+  .pr-domain-text { flex: 1; }
+  .pr-domain-name {
+    font-weight: 600;
+    font-size: 12px;
+    color: #1a1a1a;
+    margin-bottom: 2px;
+  }
+  .pr-domain-quote {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-style: italic;
+    font-size: 10.5px;
+    color: #444;
+  }
+  .pr-domain-score {
+    flex-shrink: 0;
+    min-width: 118px;
+    text-align: right;
+    font-size: 11.5px;
+    font-weight: 700;
+    color: #1a1a1a;
+    white-space: nowrap;
+  }
+
+  .pr-band {
+    border-left: 3px solid #350944;
+    padding: 10px 14px;
+    margin-bottom: 16px;
+    page-break-inside: avoid;
+  }
+  .pr-band strong {
+    display: block;
+    font-size: 12.5px;
+    margin-bottom: 4px;
+    color: #1a1a1a;
+  }
+  .pr-band p {
+    margin: 0;
+    font-size: 11px;
+    line-height: 1.5;
+    color: #333;
+  }
+
+  .pr-footer {
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+    font-size: 9.5px;
+    color: #666;
+    text-align: center;
+  }
+
+  @media print {
+    @page { margin: 0.6in; }
+    body { background: #fff; }
+    .screen-only { display: none !important; }
+    .print-only { display: block !important; }
+  }
+
+</style>
+</head>
+<body>
+
+<div class="page-wrap">
+
+<div class="screen-only">
+
+  <!-- SLIDER ASSESSMENT -->
+  <div class="assessment-widget">
+    <div class="aw-header">
+      <div class="aw-header-text">
+        <h3 id="hdr-title">Prosci AI Integration Readiness - Quick Assessment</h3>
+        <p id="hdr-sub">Rate your organization across five research-based domains. Drag each slider — your readiness score updates instantly on the right.</p>
+      </div>
+      <div class="aw-lang">
+        <label for="lang-select" class="aw-lang-label" id="lang-label">Language</label>
+        <select id="lang-select" class="aw-lang-select" onchange="setLanguage(this.value)">
+          <option value="en">English</option>
+          <option value="de">Deutsch</option>
+          <option value="fr">Français</option>
+          <option value="es">Español</option>
+          <option value="it">Italiano</option>
+          <option value="pt">Português</option>
+          <option value="nl">Nederlands</option>
+          <option value="pl">Polski</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="aw-body">
+
+      <!-- LEFT: sliders -->
+      <div class="aw-left">
+        <div class="aw-legend">
+          <div class="aw-legend-item"><strong>1</strong><span id="legend-1">Not in place</span></div>
+          <div class="aw-legend-item"><strong>2</strong><span id="legend-2">Minimal</span></div>
+          <div class="aw-legend-item"><strong>3</strong><span id="legend-3">Partial</span></div>
+          <div class="aw-legend-item"><strong>4</strong><span id="legend-4">Mostly</span></div>
+          <div class="aw-legend-item"><strong>5</strong><span id="legend-5">Fully in place</span></div>
+        </div>
+
+        <div class="aw-domains" id="aw-domains">
+
+          <div class="aw-domain">
+            <div class="aw-domain-top">
+              <div>
+                <div class="aw-domain-name" id="domain-name-1">Leadership &amp; Bold AI Vision</div>
+                <div class="aw-domain-sub" id="domain-sub-1">"<span id="domain-sub-text-1">Our senior leaders actively champion AI integration — visibly and beyond delegation.</span>"</div>
+              </div>
+              <div class="aw-domain-score scored-low" id="score-display-1">1</div>
+            </div>
+            <div class="aw-slider-wrap">
+              <input type="range" class="aw-slider" id="slider-1" min="1" max="5" value="1" step="1"
+                     aria-label="Leadership and Bold AI Vision readiness, 1 to 5" oninput="updateSlider(1,this.value)">
+              <div class="aw-tick-labels"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
+            </div>
+          </div>
+
+          <div class="aw-domain">
+            <div class="aw-domain-top">
+              <div>
+                <div class="aw-domain-name" id="domain-name-2">Change Management Excellence</div>
+                <div class="aw-domain-sub" id="domain-sub-2">"<span id="domain-sub-text-2">We use a structured, proactive change approach to guide AI integration — and adapt based on feedback.</span>"</div>
+              </div>
+              <div class="aw-domain-score scored-low" id="score-display-2">1</div>
+            </div>
+            <div class="aw-slider-wrap">
+              <input type="range" class="aw-slider" id="slider-2" min="1" max="5" value="1" step="1"
+                     aria-label="Change Management Excellence readiness, 1 to 5" oninput="updateSlider(2,this.value)">
+              <div class="aw-tick-labels"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
+            </div>
+          </div>
+
+          <div class="aw-domain">
+            <div class="aw-domain-top">
+              <div>
+                <div class="aw-domain-name" id="domain-name-3">Transparency &amp; Trust</div>
+                <div class="aw-domain-sub" id="domain-sub-3">"<span id="domain-sub-text-3">Employees understand how AI decisions are made and can raise concerns — with confidence leadership will respond.</span>"</div>
+              </div>
+              <div class="aw-domain-score scored-low" id="score-display-3">1</div>
+            </div>
+            <div class="aw-slider-wrap">
+              <input type="range" class="aw-slider" id="slider-3" min="1" max="5" value="1" step="1"
+                     aria-label="Transparency and Trust readiness, 1 to 5" oninput="updateSlider(3,this.value)">
+              <div class="aw-tick-labels"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
+            </div>
+          </div>
+
+          <div class="aw-domain">
+            <div class="aw-domain-top">
+              <div>
+                <div class="aw-domain-name" id="domain-name-4">Organizational Capabilities</div>
+                <div class="aw-domain-sub" id="domain-sub-4">"<span id="domain-sub-text-4">AI skills are broadly accessible across roles — and we measure integration outcomes as part of how we track progress.</span>"</div>
+              </div>
+              <div class="aw-domain-score scored-low" id="score-display-4">1</div>
+            </div>
+            <div class="aw-slider-wrap">
+              <input type="range" class="aw-slider" id="slider-4" min="1" max="5" value="1" step="1"
+                     aria-label="Organizational Capabilities readiness, 1 to 5" oninput="updateSlider(4,this.value)">
+              <div class="aw-tick-labels"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
+            </div>
+          </div>
+
+          <div class="aw-domain">
+            <div class="aw-domain-top">
+              <div>
+                <div class="aw-domain-name" id="domain-name-5">Cross-Cutting Challenges</div>
+                <div class="aw-domain-sub" id="domain-sub-5">"<span id="domain-sub-text-5">Employees see AI as an opportunity — and we tailor our approach to different roles rather than a one-size rollout.</span>"</div>
+              </div>
+              <div class="aw-domain-score scored-low" id="score-display-5">1</div>
+            </div>
+            <div class="aw-slider-wrap">
+              <input type="range" class="aw-slider" id="slider-5" min="1" max="5" value="1" step="1"
+                     aria-label="Cross-Cutting Challenges readiness, 1 to 5" oninput="updateSlider(5,this.value)">
+              <div class="aw-tick-labels"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
+            </div>
+          </div>
+
+        </div><!-- /aw-domains -->
+      </div><!-- /aw-left -->
+
+      <!-- RIGHT: always-visible results -->
+      <div class="aw-right" id="aw-right">
+        <div class="aw-right-score-block">
+          <div class="aw-right-label" id="score-label">Your Readiness Score</div>
+          <div class="aw-right-total" id="aw-total" aria-live="polite">5 <span>/ 25</span></div>
+          <div class="aw-right-sublabel" id="score-sublabel">Move the sliders to update</div>
+        </div>
+
+        <div class="aw-bars-block" id="aw-bars"></div>
+
+        <div id="aw-band-wrap" aria-live="polite">
+          <div class="aw-band low">
+            <strong>Significant gaps detected</strong>
+            <p>Move the sliders to reflect your organization's honest position — your personalized guidance will appear here.</p>
+          </div>
+        </div>
+
+        <div class="aw-cta">
+          <a href="https://www.prosci.com/solutions/ai-solutions-for-enterprises" class="btn-damson-sm" target="_blank" rel="noopener noreferrer" id="cta-primary">Request a Diagnostic Workshop</a>
+          <a href="mailto:solutions@prosci.com" class="btn-outline-light" id="cta-secondary">Email an Advisor</a>
+          <button type="button" class="btn-print" onclick="window.print()"><span aria-hidden="true">🖨️</span> <span id="print-btn-text">Print / Save as PDF</span></button>
+        </div>
+      </div><!-- /aw-right -->
+
+    </div><!-- /aw-body -->
+  </div><!-- /assessment-widget -->
+
+  <footer>
+    <div class="footer-brand">
+      Prosci
+      <span id="footer-copyright">© 2026 Prosci Inc. All rights reserved. ADKAR® is a registered trademark of Prosci Inc.</span>
+    </div>
+    <div class="footer-note" id="footer-note">prosci.com · AI Advisory Services</div>
+  </footer>
+
+</div><!-- /screen-only -->
+
+<div id="print-summary" class="print-only"></div>
+
+</div><!-- /page-wrap -->
+
+<script>
+const sliderScores = {1:1,2:1,3:1,4:1,5:1};
+let hasInteracted = false;
+let currentLang = 'en';
+
+const TR = {
+
+  en: {
+    pageTitle: "Prosci AI Integration Readiness - Quick Assessment",
+    headerTitle: "Prosci AI Integration Readiness - Quick Assessment",
+    headerSub: "Rate your organization across five research-based domains. Drag each slider — your readiness score updates instantly on the right.",
+    langLabel: "Language",
+    legend: ["Not in place", "Minimal", "Partial", "Mostly", "Fully in place"],
+    domainNames: ["Leadership & Bold AI Vision", "Change Management Excellence", "Transparency & Trust", "Organizational Capabilities", "Cross-Cutting Challenges"],
+    domainQuotes: [
+      "Our senior leaders actively champion AI integration — visibly and beyond delegation.",
+      "We use a structured, proactive change approach to guide AI integration — and adapt based on feedback.",
+      "Employees understand how AI decisions are made and can raise concerns — with confidence leadership will respond.",
+      "AI skills are broadly accessible across roles — and we measure integration outcomes as part of how we track progress.",
+      "Employees see AI as an opportunity — and we tailor our approach to different roles rather than a one-size rollout."
+    ],
+    domainAbbr: ["Ldshp", "CM Exc", "Trust", "Org Cap", "X-Cut"],
+    scoreLabel: "Your Readiness Score",
+    sublabel: "Move the sliders to update",
+    placeholderBand: { title: "Significant gaps detected", text: "Move the sliders to reflect your organization's honest position — your personalized guidance will appear here." },
+    bands: {
+      low:  { title: "Significant gaps in your conditions", text: "Foundational conditions for AI integration are not in place across multiple areas. A full diagnostic workshop is the right next step." },
+      mid:  { title: "Mixed readiness — gaps to address", text: "You have real strengths, but gaps in key areas are limiting your ability to scale AI value. Targeted capability building can unlock significant impact." },
+      high: { title: "Strong conditions — sustain and scale", text: "Solid human conditions are in place. The focus now is sustaining momentum and building adaptive capability for every next wave of AI change." }
+    },
+    ctaPrimary: "Request a Diagnostic Workshop",
+    ctaSecondary: "Email an Advisor",
+    printBtnText: "Print / Save as PDF",
+    footerCopyright: "© 2026 Prosci Inc. All rights reserved. ADKAR® is a registered trademark of Prosci Inc.",
+    footerNote: "prosci.com · AI Advisory Services",
+    printTitle: "Prosci AI Integration Readiness - Quick Assessment: Results",
+    printFooter: "Prosci Inc. · © 2026 Prosci Inc. All rights reserved. ADKAR® is a registered trademark of Prosci Inc. · prosci.com",
+    ariaSuffix: "readiness, 1 to 5",
+    ariaOutOf: "out of 5 —",
+    locale: "en-GB"
+  },
+
+  de: {
+    pageTitle: "Prosci KI-Integrationsbereitschaft – Schnellbewertung",
+    headerTitle: "Prosci KI-Integrationsbereitschaft – Schnellbewertung",
+    headerSub: "Bewerten Sie Ihr Unternehmen anhand von fünf forschungsbasierten Bereichen. Bewegen Sie die Regler — Ihr Bereitschaftswert wird rechts sofort aktualisiert.",
+    langLabel: "Sprache",
+    legend: ["Nicht vorhanden", "Minimal", "Teilweise", "Größtenteils", "Vollständig vorhanden"],
+    domainNames: ["Führung & mutige KI-Vision", "Exzellenz im Change Management", "Transparenz & Vertrauen", "Organisatorische Fähigkeiten", "Bereichsübergreifende Herausforderungen"],
+    domainQuotes: [
+      "Unsere Führungskräfte setzen sich aktiv für die KI-Integration ein — sichtbar und über die reine Delegation hinaus.",
+      "Wir nutzen einen strukturierten, proaktiven Change-Management-Ansatz zur Steuerung der KI-Integration — und passen ihn anhand von Feedback an.",
+      "Mitarbeitende verstehen, wie KI-Entscheidungen getroffen werden, und können Bedenken äußern — im Vertrauen darauf, dass die Führung reagiert.",
+      "KI-Kompetenzen sind rollenübergreifend breit zugänglich — und wir messen die Integrationsergebnisse als Teil unserer Fortschrittskontrolle.",
+      "Mitarbeitende sehen KI als Chance — und wir passen unseren Ansatz je nach Rolle an, statt eines einheitlichen Vorgehens."
+    ],
+    domainAbbr: ["Führung", "CM", "Vertrau.", "Fähigk.", "Quer"],
+    scoreLabel: "Ihr Bereitschaftswert",
+    sublabel: "Bewegen Sie die Regler, um zu aktualisieren",
+    placeholderBand: { title: "Erhebliche Lücken erkannt", text: "Bewegen Sie die Regler, um die tatsächliche Situation Ihres Unternehmens abzubilden — Ihre persönliche Einschätzung erscheint hier." },
+    bands: {
+      low:  { title: "Erhebliche Lücken in Ihren Voraussetzungen", text: "Grundlegende Voraussetzungen für die KI-Integration fehlen in mehreren Bereichen. Ein umfassender Diagnose-Workshop ist der richtige nächste Schritt." },
+      mid:  { title: "Gemischte Bereitschaft — Lücken zu schließen", text: "Sie verfügen über echte Stärken, doch Lücken in Schlüsselbereichen begrenzen Ihre Fähigkeit, den KI-Nutzen zu skalieren. Gezielter Kompetenzaufbau kann erhebliche Wirkung entfalten." },
+      high: { title: "Solide Voraussetzungen — festigen und ausbauen", text: "Solide menschliche Voraussetzungen sind vorhanden. Der Fokus liegt nun darauf, die Dynamik aufrechtzuerhalten und die Anpassungsfähigkeit für jede weitere Welle des KI-Wandels auszubauen." }
+    },
+    ctaPrimary: "Diagnose-Workshop anfragen",
+    ctaSecondary: "E-Mail an einen Berater",
+    printBtnText: "Drucken / Als PDF speichern",
+    footerCopyright: "© 2026 Prosci Inc. Alle Rechte vorbehalten. ADKAR® ist eine eingetragene Marke der Prosci Inc.",
+    footerNote: "prosci.com · KI-Beratungsleistungen",
+    printTitle: "Prosci KI-Integrationsbereitschaft – Schnellbewertung: Ergebnisse",
+    printFooter: "Prosci Inc. · © 2026 Prosci Inc. Alle Rechte vorbehalten. ADKAR® ist eine eingetragene Marke der Prosci Inc. · prosci.com",
+    ariaSuffix: "Bereitschaft, 1 bis 5",
+    ariaOutOf: "von 5 —",
+    locale: "de-DE"
+  },
+
+  fr: {
+    pageTitle: "Prosci Préparation à l'intégration de l'IA - Évaluation rapide",
+    headerTitle: "Prosci Préparation à l'intégration de l'IA - Évaluation rapide",
+    headerSub: "Évaluez votre organisation selon cinq domaines fondés sur la recherche. Déplacez chaque curseur — votre score de préparation se met à jour instantanément à droite.",
+    langLabel: "Langue",
+    legend: ["Non en place", "Minimal", "Partiel", "En grande partie", "Pleinement en place"],
+    domainNames: ["Leadership & vision audacieuse de l'IA", "Excellence en gestion du changement", "Transparence & confiance", "Capacités organisationnelles", "Enjeux transversaux"],
+    domainQuotes: [
+      "Nos dirigeants soutiennent activement l'intégration de l'IA — de manière visible et au-delà de la simple délégation.",
+      "Nous utilisons une approche du changement structurée et proactive pour piloter l'intégration de l'IA — et l'adaptons en fonction des retours.",
+      "Les collaborateurs comprennent comment les décisions liées à l'IA sont prises et peuvent exprimer leurs préoccupations — avec la certitude que la direction y répondra.",
+      "Les compétences en IA sont largement accessibles à tous les rôles — et nous mesurons les résultats de l'intégration dans le cadre de notre suivi.",
+      "Les collaborateurs voient l'IA comme une opportunité — et nous adaptons notre approche selon les rôles plutôt que d'appliquer un déploiement uniforme."
+    ],
+    domainAbbr: ["Leader.", "Chang.", "Confia.", "Capac.", "Transv."],
+    scoreLabel: "Votre score de préparation",
+    sublabel: "Déplacez les curseurs pour mettre à jour",
+    placeholderBand: { title: "Écarts importants détectés", text: "Déplacez les curseurs pour refléter la situation réelle de votre organisation — vos recommandations personnalisées apparaîtront ici." },
+    bands: {
+      low:  { title: "Écarts importants dans vos conditions", text: "Les conditions fondamentales pour l'intégration de l'IA ne sont pas en place dans plusieurs domaines. Un atelier de diagnostic complet est la prochaine étape à privilégier." },
+      mid:  { title: "Préparation mitigée — des écarts à combler", text: "Vous disposez de réels atouts, mais des écarts dans des domaines clés limitent votre capacité à faire évoluer la valeur de l'IA. Un renforcement ciblé des compétences peut avoir un impact significatif." },
+      high: { title: "Conditions solides — maintenir et développer", text: "Des conditions humaines solides sont en place. L'enjeu est désormais de maintenir la dynamique et de développer la capacité d'adaptation pour chaque nouvelle vague de changement lié à l'IA." }
+    },
+    ctaPrimary: "Demander un atelier de diagnostic",
+    ctaSecondary: "Contacter un conseiller par e-mail",
+    printBtnText: "Imprimer / Enregistrer en PDF",
+    footerCopyright: "© 2026 Prosci Inc. Tous droits réservés. ADKAR® est une marque déposée de Prosci Inc.",
+    footerNote: "prosci.com · Services de conseil en IA",
+    printTitle: "Prosci Préparation à l'intégration de l'IA - Évaluation rapide : Résultats",
+    printFooter: "Prosci Inc. · © 2026 Prosci Inc. Tous droits réservés. ADKAR® est une marque déposée de Prosci Inc. · prosci.com",
+    ariaSuffix: "préparation, de 1 à 5",
+    ariaOutOf: "sur 5 —",
+    locale: "fr-FR"
+  },
+
+  es: {
+    pageTitle: "Prosci Preparación para la integración de IA - Evaluación rápida",
+    headerTitle: "Prosci Preparación para la integración de IA - Evaluación rápida",
+    headerSub: "Evalúe su organización en cinco ámbitos basados en investigación. Mueva cada control deslizante — su puntuación de preparación se actualiza al instante a la derecha.",
+    langLabel: "Idioma",
+    legend: ["No implementado", "Mínimo", "Parcial", "Mayormente", "Totalmente implementado"],
+    domainNames: ["Liderazgo y visión audaz de la IA", "Excelencia en la gestión del cambio", "Transparencia y confianza", "Capacidades organizativas", "Desafíos transversales"],
+    domainQuotes: [
+      "Nuestros líderes sénior impulsan activamente la integración de la IA — de forma visible y más allá de la simple delegación.",
+      "Utilizamos un enfoque de gestión del cambio estructurado y proactivo para guiar la integración de la IA — y lo adaptamos según la retroalimentación.",
+      "Los empleados entienden cómo se toman las decisiones sobre IA y pueden plantear inquietudes — con la confianza de que la dirección responderá.",
+      "Las competencias en IA son ampliamente accesibles en todos los roles — y medimos los resultados de la integración como parte de nuestro seguimiento.",
+      "Los empleados ven la IA como una oportunidad — y adaptamos nuestro enfoque según el rol, en lugar de aplicar un despliegue único para todos."
+    ],
+    domainAbbr: ["Lideraz.", "Cambio", "Confia.", "Capac.", "Transv."],
+    scoreLabel: "Su puntuación de preparación",
+    sublabel: "Mueva los controles deslizantes para actualizar",
+    placeholderBand: { title: "Brechas importantes detectadas", text: "Mueva los controles deslizantes para reflejar la situación real de su organización — su orientación personalizada aparecerá aquí." },
+    bands: {
+      low:  { title: "Brechas importantes en sus condiciones", text: "Las condiciones fundamentales para la integración de la IA no están presentes en varias áreas. Un taller de diagnóstico completo es el siguiente paso adecuado." },
+      mid:  { title: "Preparación mixta — brechas por resolver", text: "Cuenta con fortalezas reales, pero las brechas en áreas clave limitan su capacidad para escalar el valor de la IA. El desarrollo de capacidades específicas puede generar un impacto significativo." },
+      high: { title: "Condiciones sólidas — mantener y escalar", text: "Existen condiciones humanas sólidas. El enfoque ahora es mantener el impulso y desarrollar la capacidad de adaptación para cada nueva ola de cambio impulsado por la IA." }
+    },
+    ctaPrimary: "Solicitar un taller de diagnóstico",
+    ctaSecondary: "Enviar un correo a un asesor",
+    printBtnText: "Imprimir / Guardar como PDF",
+    footerCopyright: "© 2026 Prosci Inc. Todos los derechos reservados. ADKAR® es una marca registrada de Prosci Inc.",
+    footerNote: "prosci.com · Servicios de asesoría en IA",
+    printTitle: "Prosci Preparación para la integración de IA - Evaluación rápida: Resultados",
+    printFooter: "Prosci Inc. · © 2026 Prosci Inc. Todos los derechos reservados. ADKAR® es una marca registrada de Prosci Inc. · prosci.com",
+    ariaSuffix: "preparación, de 1 a 5",
+    ariaOutOf: "de 5 —",
+    locale: "es-ES"
+  },
+
+  it: {
+    pageTitle: "Prosci Preparazione all'integrazione dell'IA - Valutazione rapida",
+    headerTitle: "Prosci Preparazione all'integrazione dell'IA - Valutazione rapida",
+    headerSub: "Valutate la vostra organizzazione in cinque ambiti basati sulla ricerca. Trascinate ogni cursore — il punteggio di preparazione si aggiorna istantaneamente a destra.",
+    langLabel: "Lingua",
+    legend: ["Non presente", "Minimo", "Parziale", "In gran parte", "Pienamente presente"],
+    domainNames: ["Leadership e visione audace sull'IA", "Eccellenza nella gestione del cambiamento", "Trasparenza e fiducia", "Capacità organizzative", "Sfide trasversali"],
+    domainQuotes: [
+      "I nostri dirigenti sostengono attivamente l'integrazione dell'IA — in modo visibile e non solo delegando.",
+      "Utilizziamo un approccio al cambiamento strutturato e proattivo per guidare l'integrazione dell'IA — adattandolo in base al feedback.",
+      "I dipendenti comprendono come vengono prese le decisioni sull'IA e possono sollevare dubbi — con la fiducia che la leadership risponderà.",
+      "Le competenze sull'IA sono ampiamente accessibili a tutti i ruoli — e misuriamo i risultati dell'integrazione nell'ambito del monitoraggio dei progressi.",
+      "I dipendenti vedono l'IA come un'opportunità — e adattiamo il nostro approccio ai diversi ruoli anziché applicare un'implementazione uniforme."
+    ],
+    domainAbbr: ["Leader.", "Cambio", "Fiducia", "Capac.", "Trasv."],
+    scoreLabel: "Il vostro punteggio di preparazione",
+    sublabel: "Trascinate i cursori per aggiornare",
+    placeholderBand: { title: "Rilevate lacune significative", text: "Trascinate i cursori per riflettere la reale situazione della vostra organizzazione — le indicazioni personalizzate appariranno qui." },
+    bands: {
+      low:  { title: "Lacune significative nelle vostre condizioni", text: "Le condizioni di base per l'integrazione dell'IA non sono presenti in diverse aree. Un workshop diagnostico completo è il passo successivo più indicato." },
+      mid:  { title: "Preparazione mista — lacune da colmare", text: "Avete punti di forza reali, ma le lacune in aree chiave limitano la vostra capacità di scalare il valore dell'IA. Un potenziamento mirato delle competenze può generare un impatto significativo." },
+      high: { title: "Condizioni solide — mantenere e scalare", text: "Sono presenti solide condizioni umane. L'attenzione ora si sposta sul mantenere lo slancio e sviluppare la capacità di adattamento per ogni nuova ondata di cambiamento legato all'IA." }
+    },
+    ctaPrimary: "Richiedere un workshop diagnostico",
+    ctaSecondary: "Scrivere a un consulente",
+    printBtnText: "Stampare / Salvare come PDF",
+    footerCopyright: "© 2026 Prosci Inc. Tutti i diritti riservati. ADKAR® è un marchio registrato di Prosci Inc.",
+    footerNote: "prosci.com · Servizi di consulenza sull'IA",
+    printTitle: "Prosci Preparazione all'integrazione dell'IA - Valutazione rapida: Risultati",
+    printFooter: "Prosci Inc. · © 2026 Prosci Inc. Tutti i diritti riservati. ADKAR® è un marchio registrato di Prosci Inc. · prosci.com",
+    ariaSuffix: "preparazione, da 1 a 5",
+    ariaOutOf: "su 5 —",
+    locale: "it-IT"
+  },
+
+  pt: {
+    pageTitle: "Prosci Prontidão para a Integração de IA - Avaliação Rápida",
+    headerTitle: "Prosci Prontidão para a Integração de IA - Avaliação Rápida",
+    headerSub: "Avalie a sua organização em cinco domínios baseados em investigação. Arraste cada cursor — a sua pontuação de prontidão é atualizada instantaneamente à direita.",
+    langLabel: "Idioma",
+    legend: ["Inexistente", "Mínimo", "Parcial", "Maioritariamente", "Totalmente implementado"],
+    domainNames: ["Liderança e visão ousada de IA", "Excelência em gestão da mudança", "Transparência e confiança", "Capacidades organizacionais", "Desafios transversais"],
+    domainQuotes: [
+      "Os nossos líderes seniores defendem ativamente a integração da IA — de forma visível e para além da simples delegação.",
+      "Utilizamos uma abordagem de gestão da mudança estruturada e proativa para orientar a integração da IA — adaptando-a com base no feedback.",
+      "Os colaboradores compreendem como as decisões sobre IA são tomadas e podem manifestar preocupações — com a confiança de que a liderança responderá.",
+      "As competências em IA são amplamente acessíveis a todas as funções — e medimos os resultados da integração como parte do nosso acompanhamento.",
+      "Os colaboradores veem a IA como uma oportunidade — e adaptamos a nossa abordagem consoante a função, em vez de aplicar uma implementação uniforme."
+    ],
+    domainAbbr: ["Lideran.", "Mudança", "Confia.", "Capac.", "Transv."],
+    scoreLabel: "A sua pontuação de prontidão",
+    sublabel: "Arraste os cursores para atualizar",
+    placeholderBand: { title: "Lacunas significativas detetadas", text: "Arraste os cursores para refletir a situação real da sua organização — a sua orientação personalizada aparecerá aqui." },
+    bands: {
+      low:  { title: "Lacunas significativas nas suas condições", text: "As condições fundamentais para a integração da IA não estão presentes em várias áreas. Um workshop de diagnóstico completo é o próximo passo indicado." },
+      mid:  { title: "Prontidão mista — lacunas a resolver", text: "Tem pontos fortes reais, mas as lacunas em áreas-chave limitam a sua capacidade de escalar o valor da IA. O desenvolvimento de competências direcionado pode ter um impacto significativo." },
+      high: { title: "Condições sólidas — manter e escalar", text: "Existem condições humanas sólidas. O foco agora é manter o impulso e desenvolver a capacidade de adaptação para cada nova vaga de mudança impulsionada pela IA." }
+    },
+    ctaPrimary: "Solicitar um workshop de diagnóstico",
+    ctaSecondary: "Enviar um e-mail a um consultor",
+    printBtnText: "Imprimir / Guardar como PDF",
+    footerCopyright: "© 2026 Prosci Inc. Todos os direitos reservados. ADKAR® é uma marca registada da Prosci Inc.",
+    footerNote: "prosci.com · Serviços de consultoria em IA",
+    printTitle: "Prosci Prontidão para a Integração de IA - Avaliação Rápida: Resultados",
+    printFooter: "Prosci Inc. · © 2026 Prosci Inc. Todos os direitos reservados. ADKAR® é uma marca registada da Prosci Inc. · prosci.com",
+    ariaSuffix: "prontidão, de 1 a 5",
+    ariaOutOf: "de 5 —",
+    locale: "pt-PT"
+  },
+
+  nl: {
+    pageTitle: "Prosci AI-integratiegereedheid - Snelle beoordeling",
+    headerTitle: "Prosci AI-integratiegereedheid - Snelle beoordeling",
+    headerSub: "Beoordeel uw organisatie op vijf onderzoeksgebaseerde domeinen. Verschuif elke schuifregelaar — uw gereedheidsscore wordt direct rechts bijgewerkt.",
+    langLabel: "Taal",
+    legend: ["Niet aanwezig", "Minimaal", "Gedeeltelijk", "Grotendeels", "Volledig aanwezig"],
+    domainNames: ["Leiderschap & gedurfde AI-visie", "Uitmuntend verandermanagement", "Transparantie & vertrouwen", "Organisatorische capaciteiten", "Overkoepelende uitdagingen"],
+    domainQuotes: [
+      "Onze senior leiders zetten zich actief in voor AI-integratie — zichtbaar en verder dan alleen delegeren.",
+      "Wij hanteren een gestructureerde, proactieve veranderaanpak om AI-integratie te sturen — en passen deze aan op basis van feedback.",
+      "Medewerkers begrijpen hoe AI-beslissingen tot stand komen en kunnen zorgen uiten — met het vertrouwen dat het leiderschap zal reageren.",
+      "AI-vaardigheden zijn breed toegankelijk voor alle rollen — en wij meten integratieresultaten als onderdeel van onze voortgangsbewaking.",
+      "Medewerkers zien AI als een kans — en wij stemmen onze aanpak af op verschillende rollen in plaats van één uniforme uitrol."
+    ],
+    domainAbbr: ["Leider.", "Veran.", "Vertr.", "Capac.", "Overk."],
+    scoreLabel: "Uw gereedheidsscore",
+    sublabel: "Verschuif de regelaars om bij te werken",
+    placeholderBand: { title: "Aanzienlijke lacunes gedetecteerd", text: "Verschuif de regelaars om de werkelijke situatie van uw organisatie weer te geven — uw persoonlijke advies verschijnt hier." },
+    bands: {
+      low:  { title: "Aanzienlijke lacunes in uw randvoorwaarden", text: "Fundamentele randvoorwaarden voor AI-integratie ontbreken op meerdere gebieden. Een uitgebreide diagnostische workshop is de juiste volgende stap." },
+      mid:  { title: "Gemengde gereedheid — lacunes aan te pakken", text: "U beschikt over echte sterke punten, maar lacunes op belangrijke gebieden beperken uw vermogen om AI-waarde op te schalen. Gerichte capaciteitsopbouw kan aanzienlijke impact opleveren." },
+      high: { title: "Sterke randvoorwaarden — behouden en opschalen", text: "Er zijn solide menselijke randvoorwaarden aanwezig. De focus ligt nu op het behouden van momentum en het opbouwen van aanpassingsvermogen voor elke volgende golf van AI-verandering." }
+    },
+    ctaPrimary: "Diagnostische workshop aanvragen",
+    ctaSecondary: "Een adviseur e-mailen",
+    printBtnText: "Afdrukken / Opslaan als PDF",
+    footerCopyright: "© 2026 Prosci Inc. Alle rechten voorbehouden. ADKAR® is een gedeponeerd handelsmerk van Prosci Inc.",
+    footerNote: "prosci.com · AI-adviesdiensten",
+    printTitle: "Prosci AI-integratiegereedheid - Snelle beoordeling: Resultaten",
+    printFooter: "Prosci Inc. · © 2026 Prosci Inc. Alle rechten voorbehouden. ADKAR® is een gedeponeerd handelsmerk van Prosci Inc. · prosci.com",
+    ariaSuffix: "gereedheid, 1 tot 5",
+    ariaOutOf: "van de 5 —",
+    locale: "nl-NL"
+  },
+
+  pl: {
+    pageTitle: "Prosci Gotowość do integracji AI - Szybka ocena",
+    headerTitle: "Prosci Gotowość do integracji AI - Szybka ocena",
+    headerSub: "Oceń swoją organizację w pięciu obszarach opartych na badaniach. Przesuń każdy suwak — Twój wynik gotowości aktualizuje się natychmiast po prawej stronie.",
+    langLabel: "Język",
+    legend: ["Brak wdrożenia", "Minimalne", "Częściowe", "W dużej mierze", "Pełne wdrożenie"],
+    domainNames: ["Przywództwo i śmiała wizja AI", "Doskonałość w zarządzaniu zmianą", "Przejrzystość i zaufanie", "Możliwości organizacyjne", "Wyzwania przekrojowe"],
+    domainQuotes: [
+      "Nasi liderzy najwyższego szczebla aktywnie wspierają integrację AI — w sposób widoczny, wykraczający poza samo delegowanie.",
+      "Stosujemy uporządkowane, proaktywne podejście do zarządzania zmianą, aby prowadzić integrację AI — i dostosowujemy je na podstawie informacji zwrotnych.",
+      "Pracownicy rozumieją, w jaki sposób podejmowane są decyzje dotyczące AI, i mogą zgłaszać wątpliwości — mając pewność, że kierownictwo zareaguje.",
+      "Kompetencje w zakresie AI są szeroko dostępne dla wszystkich ról — a wyniki integracji mierzymy w ramach śledzenia postępów.",
+      "Pracownicy postrzegają AI jako szansę — a nasze podejście dostosowujemy do poszczególnych ról, zamiast stosować jednolite wdrożenie."
+    ],
+    domainAbbr: ["Przyw.", "Zmiana", "Zaufan.", "Możliw.", "Przekr."],
+    scoreLabel: "Twój wynik gotowości",
+    sublabel: "Przesuń suwaki, aby zaktualizować",
+    placeholderBand: { title: "Wykryto istotne luki", text: "Przesuń suwaki, aby odzwierciedlić rzeczywistą sytuację Twojej organizacji — spersonalizowane wskazówki pojawią się tutaj." },
+    bands: {
+      low:  { title: "Istotne luki w Twoich warunkach", text: "Podstawowe warunki niezbędne do integracji AI nie są spełnione w wielu obszarach. Właściwym kolejnym krokiem jest pełny warsztat diagnostyczny." },
+      mid:  { title: "Mieszana gotowość — luki do uzupełnienia", text: "Masz realne mocne strony, ale luki w kluczowych obszarach ograniczają możliwość skalowania wartości AI. Ukierunkowane budowanie kompetencji może przynieść istotny efekt." },
+      high: { title: "Solidne warunki — utrzymać i skalować", text: "Solidne warunki ludzkie są już spełnione. Teraz najważniejsze jest utrzymanie tempa i budowanie zdolności adaptacyjnych na każdą kolejną falę zmian związanych z AI." }
+    },
+    ctaPrimary: "Poproś o warsztat diagnostyczny",
+    ctaSecondary: "Napisz do doradcy",
+    printBtnText: "Drukuj / Zapisz jako PDF",
+    footerCopyright: "© 2026 Prosci Inc. Wszelkie prawa zastrzeżone. ADKAR® jest zarejestrowanym znakiem towarowym Prosci Inc.",
+    footerNote: "prosci.com · Usługi doradcze AI",
+    printTitle: "Prosci Gotowość do integracji AI - Szybka ocena: Wyniki",
+    printFooter: "Prosci Inc. · © 2026 Prosci Inc. Wszelkie prawa zastrzeżone. ADKAR® jest zarejestrowanym znakiem towarowym Prosci Inc. · prosci.com",
+    ariaSuffix: "gotowość, od 1 do 5",
+    ariaOutOf: "na 5 —",
+    locale: "pl-PL"
+  }
+
+};
+
+function t() {
+  return TR[currentLang];
+}
+
+function getColor(v) {
+  return v <= 2 ? '#C40B0E' : v === 3 ? '#E27225' : '#0E665E';
+}
+function getBandClass(total) {
+  return total <= 10 ? 'low' : total <= 17 ? 'mid' : 'high';
+}
+
+function updateSliderAria(i) {
+  const slider = document.getElementById('slider-' + i);
+  const v = sliderScores[i];
+  const name = t().domainNames[i - 1];
+  slider.setAttribute('aria-label', name + ' ' + t().ariaSuffix);
+  slider.setAttribute('aria-valuetext', v + ' ' + t().ariaOutOf + ' ' + t().legend[v - 1] + ', ' + name);
+}
+
+function updateSlider(domain, val) {
+  val = parseInt(val, 10);
+  sliderScores[domain] = val;
+
+  if (!hasInteracted) {
+    hasInteracted = true;
+    const sublabel = document.getElementById('score-sublabel');
+    if (sublabel) sublabel.style.display = 'none';
+  }
+
+  // color slider track
+  const slider = document.getElementById('slider-' + domain);
+  const pct = ((val - 1) / 4) * 100;
+  const color = getColor(val);
+  slider.style.background = `linear-gradient(to right, ${color} 0%, ${color} ${pct}%, #E5E1DB ${pct}%, #E5E1DB 100%)`;
+  slider.style.accentColor = color;
+  updateSliderAria(domain);
+
+  // update inline score display
+  const disp = document.getElementById('score-display-' + domain);
+  disp.textContent = val;
+  const cls = val <= 2 ? 'scored-low' : val === 3 ? 'scored-mid' : 'scored-high';
+  disp.className = 'aw-domain-score ' + cls;
+
+  renderTotalsAndBars();
+  renderBand();
+  renderPrintSummary();
+}
+
+function renderTotalsAndBars() {
+  const total = [1,2,3,4,5].reduce((s,i) => s + sliderScores[i], 0);
+
+  document.getElementById('aw-total').innerHTML = total + ' <span>/ 25</span>';
+
+  const abbr = t().domainAbbr;
+  const barsHTML = [1,2,3,4,5].map((i,idx) => {
+    const v = sliderScores[i];
+    const pct = (v / 5) * 100;
+    const color = getColor(v);
+    return `<div class="aw-bar-row">
+      <div class="aw-bar-label">${abbr[idx]}</div>
+      <div class="aw-bar-track"><div class="aw-bar-fill" style="width:${pct}%;background:${color}"></div></div>
+      <div class="aw-bar-val">${v}</div>
+    </div>`;
+  }).join('');
+  document.getElementById('aw-bars').innerHTML = barsHTML;
+}
+
+function renderPlaceholderBand() {
+  const p = t().placeholderBand;
+  document.getElementById('aw-band-wrap').innerHTML =
+    `<div class="aw-band low"><strong>${p.title}</strong><p>${p.text}</p></div>`;
+}
+
+function renderBand() {
+  const total = [1,2,3,4,5].reduce((s,i) => s + sliderScores[i], 0);
+  const bandClass = getBandClass(total);
+  const b = t().bands[bandClass];
+  document.getElementById('aw-band-wrap').innerHTML =
+    `<div class="aw-band ${bandClass}"><strong>${b.title}</strong><p>${b.text}</p></div>`;
+}
+
+function renderPrintSummary() {
+  const total = [1,2,3,4,5].reduce((s,i) => s + sliderScores[i], 0);
+  const bandClass = getBandClass(total);
+  const b = t().bands[bandClass];
+  const names = t().domainNames;
+  const quotes = t().domainQuotes;
+  const legend = t().legend;
+
+  const dateStr = new Date().toLocaleDateString(t().locale, { year: 'numeric', month: 'long', day: 'numeric' });
+
+  const rowsHTML = [1,2,3,4,5].map((i, idx) => {
+    const v = sliderScores[i];
+    return `<div class="pr-domain-row">
+      <div class="pr-domain-text">
+        <div class="pr-domain-name">${names[idx]}</div>
+        <div class="pr-domain-quote">"${quotes[idx]}"</div>
+      </div>
+      <div class="pr-domain-score">${v} / 5 — ${legend[v - 1]}</div>
+    </div>`;
+  }).join('');
+
+  const summary = document.getElementById('print-summary');
+  if (!summary) return;
+  summary.innerHTML = `
+    <div class="pr-header">
+      <h1>${t().printTitle}</h1>
+      <div class="pr-date">${dateStr}</div>
+    </div>
+    <div class="pr-total-row">
+      <div class="pr-total-label">${t().scoreLabel}</div>
+      <div class="pr-total-score">${total} <span>/ 25</span></div>
+    </div>
+    <div class="pr-domains">${rowsHTML}</div>
+    <div class="pr-band">
+      <strong>${b.title}</strong>
+      <p>${b.text}</p>
+    </div>
+    <div class="pr-footer">${t().printFooter}</div>
+  `;
+}
+
+function applyTranslations() {
+  const tr = t();
+  document.documentElement.lang = currentLang;
+  document.title = tr.pageTitle;
+
+  document.getElementById('hdr-title').textContent = tr.headerTitle;
+  document.getElementById('hdr-sub').textContent = tr.headerSub;
+  document.getElementById('lang-label').textContent = tr.langLabel;
+
+  [1,2,3,4,5].forEach(i => {
+    document.getElementById('legend-' + i).textContent = tr.legend[i - 1];
+    document.getElementById('domain-name-' + i).textContent = tr.domainNames[i - 1];
+    document.getElementById('domain-sub-text-' + i).textContent = tr.domainQuotes[i - 1];
+    updateSliderAria(i);
+  });
+
+  document.getElementById('score-label').textContent = tr.scoreLabel;
+  document.getElementById('score-sublabel').textContent = tr.sublabel;
+  document.getElementById('cta-primary').textContent = tr.ctaPrimary;
+  document.getElementById('cta-secondary').textContent = tr.ctaSecondary;
+  document.getElementById('print-btn-text').textContent = tr.printBtnText;
+  document.getElementById('footer-copyright').textContent = tr.footerCopyright;
+  document.getElementById('footer-note').textContent = tr.footerNote;
+
+  renderTotalsAndBars();
+  if (hasInteracted) {
+    renderBand();
+  } else {
+    renderPlaceholderBand();
+  }
+  renderPrintSummary();
+}
+
+function setLanguage(lang) {
+  if (!TR[lang]) return;
+  currentLang = lang;
+  applyTranslations();
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  // initialize all slider tracks to neutral grey (value = 1, so 0% fill anyway)
+  [1,2,3,4,5].forEach(i => {
+    const slider = document.getElementById('slider-' + i);
+    slider.style.background = '#E5E1DB';
+  });
+  // this also renders bars, the placeholder band, aria labels, and the
+  // print summary for the default language without disturbing the
+  // pre-interaction sublabel/placeholder state
+  applyTranslations();
+});
+</script>
+
+</body>
+</html>
