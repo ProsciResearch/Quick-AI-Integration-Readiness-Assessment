@@ -96,7 +96,7 @@
     max-width: 640px;
     font-size: 15px;
     line-height: 1.6;
-    color: var(--damson-800);
+    color: var(--near-black);
   }
 
   .aw-lang {
@@ -154,7 +154,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 8px 20px;
-    background: var(--sand);
+    background: var(--linen);
     border-radius: 10px;
     padding: 14px 18px;
     margin-bottom: 8px;
@@ -213,8 +213,8 @@
   }
 
   .aw-domain-sub {
-    font-family: 'Libre Baskerville', Georgia, serif;
-    font-style: italic;
+    font-family: 'Instrument Sans', sans-serif;
+    font-style: normal;
     font-weight: 400;
     font-size: 14px;
     line-height: 1.55;
@@ -239,8 +239,8 @@
     transition: background 0.15s, border-color 0.15s, color 0.15s;
   }
 
-  .aw-domain-score.scored-low  { background: var(--tint-red);    border-color: var(--text-red);    color: var(--text-red); }
-  .aw-domain-score.scored-mid  { background: var(--tint-orange); border-color: var(--text-orange);  color: var(--text-orange); }
+  .aw-domain-score.scored-low  { background: var(--tint-red);    border-color: var(--text-red);    color: var(--near-black); }
+  .aw-domain-score.scored-mid  { background: var(--tint-orange); border-color: var(--text-orange);  color: var(--near-black); }
   .aw-domain-score.scored-high { background: var(--tint-teal);   border-color: var(--text-teal);    color: var(--text-teal); }
 
   .aw-slider-wrap {
@@ -311,7 +311,7 @@
   .aw-right {
     flex: 1;
     min-width: 280px;
-    background: var(--sand);
+    background: var(--linen);
     border-radius: 14px;
     padding: 28px 24px;
     position: sticky;
@@ -329,28 +329,29 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    color: var(--damson-600);
+    color: var(--near-black);
     margin-bottom: 8px;
   }
 
   .aw-right-total {
-    font-family: 'Libre Baskerville', Georgia, serif;
-    font-weight: 400;
-    font-size: 40px;
-    color: var(--damson);
+    font-family: 'Instrument Sans', sans-serif;
+    font-weight: 700;
+    font-size: 44px;
+    color: var(--near-black);
     line-height: 1;
   }
 
   .aw-right-total span {
     font-family: 'Instrument Sans', sans-serif;
     font-size: 18px;
-    color: var(--damson-600);
+    font-weight: 600;
+    color: var(--near-black);
   }
 
   .aw-right-sublabel {
     font-size: 12.5px;
     font-style: italic;
-    color: var(--damson-600);
+    color: var(--near-black);
     margin-top: 6px;
   }
 
@@ -372,7 +373,7 @@
     flex-shrink: 0;
     font-size: 10.5px;
     font-weight: 600;
-    color: var(--damson-800);
+    color: var(--near-black);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -393,12 +394,16 @@
   }
 
   .aw-bar-val {
-    width: 14px;
+    min-width: 22px;
     flex-shrink: 0;
-    text-align: right;
-    font-size: 12px;
+    text-align: center;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 13px;
     font-weight: 700;
     color: var(--near-black);
+    background: var(--soft-white);
+    border-radius: 6px;
+    padding: 3px 7px;
   }
 
   .aw-band {
@@ -424,9 +429,9 @@
   }
 
   .aw-band.low    { border-left-color: var(--text-red);    background: var(--tint-red); }
-  .aw-band.low strong    { color: var(--text-red); }
+  .aw-band.low strong    { color: var(--near-black); }
   .aw-band.mid    { border-left-color: var(--text-orange); background: var(--tint-orange); }
-  .aw-band.mid strong    { color: var(--text-orange); }
+  .aw-band.mid strong    { color: var(--near-black); }
   .aw-band.high   { border-left-color: var(--text-teal);   background: var(--tint-teal); }
   .aw-band.high strong   { color: var(--text-teal); }
 
@@ -437,35 +442,23 @@
     gap: 10px;
   }
 
-  .btn-damson-sm, .btn-outline-light {
+  .btn-damson-sm {
     display: block;
     text-align: center;
     padding: 11px 18px;
     border-radius: 8px;
     font-size: 13.5px;
-    font-weight: 500;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
     cursor: pointer;
     transition: background 0.2s, border-color 0.2s, color 0.2s;
-  }
-
-  .btn-damson-sm {
     background: var(--damson);
     color: var(--soft-white);
     border: 1px solid var(--damson);
   }
   .btn-damson-sm:hover {
     background: var(--damson-800);
-    text-decoration: none;
-  }
-
-  .btn-outline-light {
-    background: transparent;
-    color: var(--damson);
-    border: 1px solid var(--border-strong);
-  }
-  .btn-outline-light:hover {
-    background: var(--damson-50);
-    border-color: var(--damson-400);
     text-decoration: none;
   }
 
@@ -585,20 +578,22 @@
     font-size: 10.5px;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: #5D3A69;
+    color: #1a1a1a;
     margin-bottom: 4px;
   }
   .pr-total-row {
     margin-bottom: 18px;
   }
   .pr-total-score {
-    font-family: 'Libre Baskerville', Georgia, serif;
+    font-family: 'Instrument Sans', sans-serif;
+    font-weight: 700;
     font-size: 26px;
-    color: #350944;
+    color: #1a1a1a;
   }
   .pr-total-score span {
     font-size: 14px;
-    color: #5D3A69;
+    font-weight: 600;
+    color: #1a1a1a;
   }
 
   .pr-domains {
@@ -621,8 +616,8 @@
     margin-bottom: 2px;
   }
   .pr-domain-quote {
-    font-family: 'Libre Baskerville', Georgia, serif;
-    font-style: italic;
+    font-family: 'Instrument Sans', sans-serif;
+    font-style: normal;
     font-size: 10.5px;
     color: #444;
   }
@@ -810,8 +805,7 @@
         </div>
 
         <div class="aw-cta">
-          <a href="https://www.prosci.com/solutions/ai-solutions-for-enterprises" class="btn-damson-sm" target="_blank" rel="noopener noreferrer" id="cta-primary">Request a Diagnostic Workshop</a>
-          <a href="mailto:solutions@prosci.com" class="btn-outline-light" id="cta-secondary">Email an Advisor</a>
+          <a href="https://www.prosci.com/solutions/ai-solutions-for-enterprises#go-to-form" class="btn-damson-sm" target="_blank" rel="noopener noreferrer" id="cta-primary">Meet with a Prosci consultant</a>
           <button type="button" class="btn-print" onclick="window.print()"><span aria-hidden="true">🖨️</span> <span id="print-btn-text">Print / Save as PDF</span></button>
         </div>
       </div><!-- /aw-right -->
@@ -863,8 +857,7 @@ const TR = {
       mid:  { title: "Mixed readiness — gaps to address", text: "You have real strengths, but gaps in key areas are limiting your ability to scale AI value. Targeted capability building can unlock significant impact." },
       high: { title: "Strong conditions — sustain and scale", text: "Solid human conditions are in place. The focus now is sustaining momentum and building adaptive capability for every next wave of AI change." }
     },
-    ctaPrimary: "Request a Diagnostic Workshop",
-    ctaSecondary: "Email an Advisor",
+    ctaPrimary: "Meet with a Prosci consultant",
     printBtnText: "Print / Save as PDF",
     footerCopyright: "© 2026 Prosci Inc. All rights reserved. ADKAR® is a registered trademark of Prosci Inc.",
     footerNote: "prosci.com · AI Advisory Services",
@@ -898,8 +891,7 @@ const TR = {
       mid:  { title: "Gemischte Bereitschaft — Lücken zu schließen", text: "Sie verfügen über echte Stärken, doch Lücken in Schlüsselbereichen begrenzen Ihre Fähigkeit, den KI-Nutzen zu skalieren. Gezielter Kompetenzaufbau kann erhebliche Wirkung entfalten." },
       high: { title: "Solide Voraussetzungen — festigen und ausbauen", text: "Solide menschliche Voraussetzungen sind vorhanden. Der Fokus liegt nun darauf, die Dynamik aufrechtzuerhalten und die Anpassungsfähigkeit für jede weitere Welle des KI-Wandels auszubauen." }
     },
-    ctaPrimary: "Diagnose-Workshop anfragen",
-    ctaSecondary: "E-Mail an einen Berater",
+    ctaPrimary: "Mit einem Prosci-Berater sprechen",
     printBtnText: "Drucken / Als PDF speichern",
     footerCopyright: "© 2026 Prosci Inc. Alle Rechte vorbehalten. ADKAR® ist eine eingetragene Marke der Prosci Inc.",
     footerNote: "prosci.com · KI-Beratungsleistungen",
@@ -933,8 +925,7 @@ const TR = {
       mid:  { title: "Préparation mitigée — des écarts à combler", text: "Vous disposez de réels atouts, mais des écarts dans des domaines clés limitent votre capacité à faire évoluer la valeur de l'IA. Un renforcement ciblé des compétences peut avoir un impact significatif." },
       high: { title: "Conditions solides — maintenir et développer", text: "Des conditions humaines solides sont en place. L'enjeu est désormais de maintenir la dynamique et de développer la capacité d'adaptation pour chaque nouvelle vague de changement lié à l'IA." }
     },
-    ctaPrimary: "Demander un atelier de diagnostic",
-    ctaSecondary: "Contacter un conseiller par e-mail",
+    ctaPrimary: "Rencontrer un consultant Prosci",
     printBtnText: "Imprimer / Enregistrer en PDF",
     footerCopyright: "© 2026 Prosci Inc. Tous droits réservés. ADKAR® est une marque déposée de Prosci Inc.",
     footerNote: "prosci.com · Services de conseil en IA",
@@ -968,8 +959,7 @@ const TR = {
       mid:  { title: "Preparación mixta — brechas por resolver", text: "Cuenta con fortalezas reales, pero las brechas en áreas clave limitan su capacidad para escalar el valor de la IA. El desarrollo de capacidades específicas puede generar un impacto significativo." },
       high: { title: "Condiciones sólidas — mantener y escalar", text: "Existen condiciones humanas sólidas. El enfoque ahora es mantener el impulso y desarrollar la capacidad de adaptación para cada nueva ola de cambio impulsado por la IA." }
     },
-    ctaPrimary: "Solicitar un taller de diagnóstico",
-    ctaSecondary: "Enviar un correo a un asesor",
+    ctaPrimary: "Reunirse con un consultor de Prosci",
     printBtnText: "Imprimir / Guardar como PDF",
     footerCopyright: "© 2026 Prosci Inc. Todos los derechos reservados. ADKAR® es una marca registrada de Prosci Inc.",
     footerNote: "prosci.com · Servicios de asesoría en IA",
@@ -1003,8 +993,7 @@ const TR = {
       mid:  { title: "Preparazione mista — lacune da colmare", text: "Avete punti di forza reali, ma le lacune in aree chiave limitano la vostra capacità di scalare il valore dell'IA. Un potenziamento mirato delle competenze può generare un impatto significativo." },
       high: { title: "Condizioni solide — mantenere e scalare", text: "Sono presenti solide condizioni umane. L'attenzione ora si sposta sul mantenere lo slancio e sviluppare la capacità di adattamento per ogni nuova ondata di cambiamento legato all'IA." }
     },
-    ctaPrimary: "Richiedere un workshop diagnostico",
-    ctaSecondary: "Scrivere a un consulente",
+    ctaPrimary: "Incontrare un consulente Prosci",
     printBtnText: "Stampare / Salvare come PDF",
     footerCopyright: "© 2026 Prosci Inc. Tutti i diritti riservati. ADKAR® è un marchio registrato di Prosci Inc.",
     footerNote: "prosci.com · Servizi di consulenza sull'IA",
@@ -1038,8 +1027,7 @@ const TR = {
       mid:  { title: "Prontidão mista — lacunas a resolver", text: "Tem pontos fortes reais, mas as lacunas em áreas-chave limitam a sua capacidade de escalar o valor da IA. O desenvolvimento de competências direcionado pode ter um impacto significativo." },
       high: { title: "Condições sólidas — manter e escalar", text: "Existem condições humanas sólidas. O foco agora é manter o impulso e desenvolver a capacidade de adaptação para cada nova vaga de mudança impulsionada pela IA." }
     },
-    ctaPrimary: "Solicitar um workshop de diagnóstico",
-    ctaSecondary: "Enviar um e-mail a um consultor",
+    ctaPrimary: "Reunir com um consultor da Prosci",
     printBtnText: "Imprimir / Guardar como PDF",
     footerCopyright: "© 2026 Prosci Inc. Todos os direitos reservados. ADKAR® é uma marca registada da Prosci Inc.",
     footerNote: "prosci.com · Serviços de consultoria em IA",
@@ -1073,8 +1061,7 @@ const TR = {
       mid:  { title: "Gemengde gereedheid — lacunes aan te pakken", text: "U beschikt over echte sterke punten, maar lacunes op belangrijke gebieden beperken uw vermogen om AI-waarde op te schalen. Gerichte capaciteitsopbouw kan aanzienlijke impact opleveren." },
       high: { title: "Sterke randvoorwaarden — behouden en opschalen", text: "Er zijn solide menselijke randvoorwaarden aanwezig. De focus ligt nu op het behouden van momentum en het opbouwen van aanpassingsvermogen voor elke volgende golf van AI-verandering." }
     },
-    ctaPrimary: "Diagnostische workshop aanvragen",
-    ctaSecondary: "Een adviseur e-mailen",
+    ctaPrimary: "Een Prosci-consultant ontmoeten",
     printBtnText: "Afdrukken / Opslaan als PDF",
     footerCopyright: "© 2026 Prosci Inc. Alle rechten voorbehouden. ADKAR® is een gedeponeerd handelsmerk van Prosci Inc.",
     footerNote: "prosci.com · AI-adviesdiensten",
@@ -1108,8 +1095,7 @@ const TR = {
       mid:  { title: "Mieszana gotowość — luki do uzupełnienia", text: "Masz realne mocne strony, ale luki w kluczowych obszarach ograniczają możliwość skalowania wartości AI. Ukierunkowane budowanie kompetencji może przynieść istotny efekt." },
       high: { title: "Solidne warunki — utrzymać i skalować", text: "Solidne warunki ludzkie są już spełnione. Teraz najważniejsze jest utrzymanie tempa i budowanie zdolności adaptacyjnych na każdą kolejną falę zmian związanych z AI." }
     },
-    ctaPrimary: "Poproś o warsztat diagnostyczny",
-    ctaSecondary: "Napisz do doradcy",
+    ctaPrimary: "Spotkaj się z konsultantem Prosci",
     printBtnText: "Drukuj / Zapisz jako PDF",
     footerCopyright: "© 2026 Prosci Inc. Wszelkie prawa zastrzeżone. ADKAR® jest zarejestrowanym znakiem towarowym Prosci Inc.",
     footerNote: "prosci.com · Usługi doradcze AI",
@@ -1263,7 +1249,6 @@ function applyTranslations() {
   document.getElementById('score-label').textContent = tr.scoreLabel;
   document.getElementById('score-sublabel').textContent = tr.sublabel;
   document.getElementById('cta-primary').textContent = tr.ctaPrimary;
-  document.getElementById('cta-secondary').textContent = tr.ctaSecondary;
   document.getElementById('print-btn-text').textContent = tr.printBtnText;
   document.getElementById('footer-copyright').textContent = tr.footerCopyright;
   document.getElementById('footer-note').textContent = tr.footerNote;
